@@ -20,6 +20,7 @@ namespace ChessLibrary
             To = to;
             Promotion = promotion;
         }
+        
         public FigureMoving(string move)
         {
             Figure = (Figure)move[0];
