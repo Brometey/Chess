@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace ChessLibrary
 {
+    /// <summary>
+    /// Клетка
+    /// </summary>
     struct Square
     {
+        // Пустая клетка.
         public static Square none = new Square(-1,-1);
+        // Координата по иксам (буквенная часть)
         public int X { get; private set; }
+        // Координата по игреку (цифра)
         public int Y { get; private set; }
 
         public Square (int x, int y)
@@ -17,6 +23,11 @@ namespace ChessLibrary
             X = x;
             Y= y;   
         }
+        /// <summary>
+        /// Конструктор, принимающий клетку в 
+        /// строчном виде.
+        /// </summary>
+        /// <param name="e2"></param>
         public Square(string e2)
         {
 
@@ -30,6 +41,10 @@ namespace ChessLibrary
             else
                 this = none;
         }
+        /// <summary>
+        /// Проверка на нахождение клетки на доске
+        /// </summary>
+        /// <returns></returns>
         public bool OnBoard()
         {
             return X>=0 && X<8 && Y>=0 && Y<8;

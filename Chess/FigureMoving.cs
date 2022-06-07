@@ -8,9 +8,13 @@ namespace ChessLibrary
 {
     class FigureMoving
     {
+        // Фигура.
         public Figure Figure { get; private set; }
+        // Откуда.
         public Square From { get;private set; }
+        // Куда.
         public Square To { get; private set; }
+        // Во что превращается, если это пешка.
         public Figure Promotion { get; private set; }
 
         public FigureMoving(FigureOnSquare fs, Square to, Figure promotion = Figure.none)
@@ -21,6 +25,10 @@ namespace ChessLibrary
             Promotion = promotion;
         }
         
+        /// <summary>
+        /// Конструктор , принимающий ход.
+        /// </summary>
+        /// <param name="move"> экземпляр хода </param>
         public FigureMoving(string move)
         {
             Figure = (Figure)move[0];
