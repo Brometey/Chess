@@ -18,6 +18,7 @@ namespace ChessLibrary
         Chess(Board board)
         {
             this.board = board;
+            Fen = board.Fen;     
         }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace ChessLibrary
             Board nextBoard = board.Move(fm);
             // Новый объект шахмат после новой доски.
             Chess nextChess = new Chess(nextBoard);
+
             return nextChess;
         }
 
