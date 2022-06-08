@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace ChessLibrary
@@ -63,6 +64,13 @@ namespace ChessLibrary
             return next;
         }
 
+        public IEnumerable<FigureOnSquare> YieldFigures()
+        {
+            foreach (Square square in Square.YieldSquares())
+                if (GetFigureAt(square).GetColor() == MoveColor)
+                    yield return new FigureOnSquare(GetFigureAt(square), square);
+        }
+
         private void GenerateFen()
         {
             Fen =  FenFigures() + " " +
@@ -80,6 +88,9 @@ namespace ChessLibrary
                 if (y > 0)
                     sb.Append('/');
             }
+            string eight = "11111111";
+            for (int j = 8; j >= 2; j--)
+                sb.Replace(eight.Substring(0, j), j.ToString());
             return sb.ToString();   
         }
     }

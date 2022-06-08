@@ -7,7 +7,7 @@ namespace ChessDemo
     {
         static void Main(string[] args)
         {
-            ChessLibrary.Chess chess = new ChessLibrary.Chess();
+            ChessLibrary.Chess chess = new ChessLibrary.Chess("rnbqkbnr/pppppppp/8/8/8/8/1PP11PPP/RNBQKBNR w KQkq - 0 1");
             while (true)
             {
                 Console.WriteLine(chess.Fen);
