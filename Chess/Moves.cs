@@ -32,12 +32,14 @@ namespace ChessLibrary
                 case Figure.whiteQueen:
                 case Figure.blackQueen:
                     return CanStraightMove();
-                case Figure.whiteRock:
-                case Figure.blackRock:
-                   return false;
+                case Figure.whiteRook:
+                case Figure.blackRook:
+                    return (fm.SignX == 0 || fm.SignY == 0) &&
+                         CanStraightMove();
                 case Figure.whiteBishop:
                 case Figure.blackBishop:
-                    return false;
+                    return (fm.SignX != 0 || fm.SignY != 0) &&
+                         CanStraightMove();
                 case Figure.whiteKnight:
                 case Figure.blackKnight:
                     return CanKnightMove();

@@ -8,14 +8,14 @@ namespace ChessLibrary
 
         whiteKing = 'K',
         whiteQueen = 'Q',
-        whiteRock = 'R',
+        whiteRook = 'R',
         whiteBishop = 'B',
         whiteKnight = 'N',
         whitePawn = 'P',
 
         blackKing = 'k',
         blackQueen = 'q',
-        blackRock = 'r',
+        blackRook = 'r',
         blackBishop = 'b',
         blackKnight = 'n',
         blackPawn = 'p',
@@ -30,7 +30,7 @@ namespace ChessLibrary
                 return Color.none;
             return (figure == Figure.whiteKing ||
                      figure == Figure.whiteQueen ||
-                     figure == Figure.whiteRock ||
+                     figure == Figure.whiteRook ||
                      figure == Figure.whiteBishop ||
                      figure == Figure.whiteKnight ||
                      figure == Figure.whitePawn) ? Color.white : Color.black;
