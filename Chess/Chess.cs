@@ -74,5 +74,14 @@ namespace ChessLibrary
                         allMoves.Add(fm);
                 }
         }
+
+        public List<string> GetAllMoves()
+        {
+            FindAllMoves();
+            List<string> list = new List<string>();
+            foreach (FigureMoving fm in allMoves)
+                list.Add(fm.ToString());
+            return list;
+        }
     }
 }

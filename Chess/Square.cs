@@ -49,7 +49,7 @@ namespace ChessLibrary
         {
             return X >= 0 && X < 8 && Y >= 0 && Y < 8;
         }
-
+        public string Name { get { return ((char)('a' + X) ).ToString() + (Y + 1).ToString(); } }
         public static bool operator ==(Square a, Square b)
         {
             return a.X == b.X && a.Y == b.Y;
@@ -67,5 +67,7 @@ namespace ChessLibrary
                     yield return new Square(x,y); 
             }
         }
+
+
     }
 }
