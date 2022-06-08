@@ -93,5 +93,40 @@ namespace ChessLibrary
                 sb.Replace(eight.Substring(0, j), j.ToString());
             return sb.ToString();   
         }
+
+        public bool IsCheck()
+        {
+            Board after = new Board(Fen);
+            after.MoveColor = MoveColor.FlipColor();
+            return after.CanEatKing();
+        }
+        public bool IsCheckAfterMove(FigureMoving fm)
+        {
+            Board after = Move(fm);
+            return after.CanEatKing();
+
+        }
+
+        bool CanEatKing()
+        {
+            Square badKing = FindbadKing();
+            Moves moves = new Moves(this);
+            foreach (FigureOnSquare fs in YieldFigures())
+            {
+                FigureMoving fm = new FigureMoving(fs,badKing);
+                if (moves.CanMove(fm))
+                    return true;    
+            }
+            return false;
+        }
+
+        private Square FindbadKing()
+        {
+            Figure badKing = MoveColor == Color.black ? Figure.whiteKing : Figure.blackKing; 
+            foreach(Square square in Square.YieldSquares())
+                if (GetFigureAt(square)==badKing)
+                    return square;
+            return Square.none;
+        }
     }
 }

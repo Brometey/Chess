@@ -14,7 +14,7 @@ namespace ChessLibrary
         List<FigureMoving> allMoves;
         public Chess(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
         {
-            Fen = fen; 
+            Fen = fen;
             board = new Board(fen);
             moves = new Moves(board);
         }
@@ -38,6 +38,8 @@ namespace ChessLibrary
             FigureMoving fm = new FigureMoving(move);
             if (!moves.CanMove(fm))
                 return this;
+            if (board.IsCheckAfterMove(fm))
+                return this;    
             // Создать новую доску после выполнения хода.
             Board nextBoard = board.Move(fm);
             // Новый объект шахмат после новой доски.
@@ -71,7 +73,8 @@ namespace ChessLibrary
                 {
                     FigureMoving fm = new FigureMoving(fs, to);
                     if (moves.CanMove(fm))
-                        allMoves.Add(fm);
+                        if (!board.IsCheckAfterMove(fm))
+                            allMoves.Add(fm);
                 }
         }
 
@@ -83,5 +86,7 @@ namespace ChessLibrary
                 list.Add(fm.ToString());
             return list;
         }
+
+
     }
 }
