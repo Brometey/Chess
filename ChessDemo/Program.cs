@@ -1,23 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using ChessLibrary;
 
 namespace ChessDemo
 {
     internal class Program
     {
+        public static Random rnd = new Random();
         static void Main(string[] args)
         {
             ChessLibrary.Chess chess = new ChessLibrary.Chess("rnbqkbnr/pppppppp/8/8/8/8/1PP11PPP/RNBQKBNR w KQkq - 0 1");
+            List<string> list;
             while (true)
             {
+                list = chess.GetAllMoves();
                 Console.WriteLine(chess.Fen);
                 Console.WriteLine(ChessToAscii(chess));
-                foreach (string moves in chess.GetAllMoves())
-                    Console.Write(moves + "\n");
+                foreach (string moves in list)
+                    Console.Write(moves + "\t");
                 Console.WriteLine();
                 Console.Write("> ");
                 string move = Console.ReadLine();
-                if (move == "") break;
+                if (move == "q") break;
+                if (move == "") move = list[rnd.Next(list.Count)];
+
                 chess = chess.Move(move);
             }
 

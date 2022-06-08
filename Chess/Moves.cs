@@ -45,9 +45,49 @@ namespace ChessLibrary
                     return CanKnightMove();
                 case Figure.whitePawn:
                 case Figure.blackPawn:
-                    return false;
+                    return CanPawnMove();
                 default: return false;
             }
+        }
+
+        bool CanPawnMove()
+        {
+            if (fm.From.Y < 1 || fm.From.Y >6)
+                return false;
+            int stepY = fm.Figure.GetColor() == Color.white ? 1 : -1;
+            return
+                CanPawnGo(stepY) ||
+                CanPawnJump(stepY) ||
+                CanPawnEat(stepY);
+        }
+
+        private bool CanPawnGo(int stepY)
+        {
+            if (board.GetFigureAt(fm.To) == Figure.none)
+                if (fm.DeltaX == 0)
+                    if(fm.DeltaY == stepY)
+                        return true;
+            return false;
+        }
+
+        private bool CanPawnJump(int stepY)
+        {
+            if (board.GetFigureAt(fm.To) == Figure.none)
+                if (fm.DeltaX == 0)
+                    if (fm.DeltaY == 2 * stepY)
+                        if (fm.From.Y == 1 || fm.From.Y == 6)
+                            if (board.GetFigureAt(new Square(fm.From.X, fm.From.Y + stepY)) == Figure.none)
+                                return true;
+            return false;
+        }
+
+        private bool CanPawnEat(int stepY)
+        {
+            if (board.GetFigureAt(fm.To) != Figure.none)
+                if (fm.AbsDeltaX == 1)
+                    if (fm.DeltaY == stepY)
+                        return true;
+            return false;
         }
 
         private bool CanStraightMove()
@@ -65,7 +105,7 @@ namespace ChessLibrary
         private bool CanMoveTo()
         {
             return fm.To.OnBoard() &&
-                fm.From!= fm.To &&
+                fm.From != fm.To &&
                 board.GetFigureAt(fm.To).GetColor() != board.MoveColor;
         }
 
@@ -73,7 +113,7 @@ namespace ChessLibrary
         {
             return fm.From.OnBoard() &&
                 fm.Figure.GetColor() == board.MoveColor;
-        }      
+        }
         /// <summary>
         /// Метод для ограничения перемещения Короля.
         /// </summary>
